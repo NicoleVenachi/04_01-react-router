@@ -7,25 +7,35 @@ import { ProfilePage } from './ProfilePage';
 import { Menu } from './Menu';
 import { BlogPage } from './BlogPage';
 import {BlogPost} from './BlogPost'
+import { LoginPage } from './LoginPage';
+import { LogoutPage } from './LogoutPage';
 
-
+import { AuthProvider} from './auth';
 
 function App() {
   return (
-    <HashRouter>
-      <Menu />
+    <>
+      <HashRouter>
 
-      <Routes>
-        <Route path='/' element={ <HomePage /> }/>
+        <AuthProvider>
+          <Menu />
 
-        <Route path='/blog/' element={ <BlogPage /> }>
-          <Route path=':slug' element={ <BlogPost /> }/>
-        </Route>
+          <Routes>
+            <Route path='/' element={ <HomePage /> }/>
 
-        <Route path='/profile' element={ <ProfilePage /> }/>
-        <Route path='*' element={ <p> Not Found</p> }/>
-      </Routes>
-    </HashRouter>
+            <Route path='/blog/' element={ <BlogPage /> }>
+              <Route path=':slug' element={ <BlogPost /> }/>
+            </Route>
+
+            <Route path='/login' element={ <LoginPage /> }/>
+            <Route path='/logout' element={ <LogoutPage /> }/>
+            <Route path='/profile' element={ <ProfilePage /> }/>
+            <Route path='*' element={ <p> Not Found</p> }/>
+            </Routes>
+        </AuthProvider>
+
+      </HashRouter>
+    </>
   );
 }
 
